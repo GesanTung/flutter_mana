@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-
-import 'package:example/json_demo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SpClient {
@@ -31,7 +29,7 @@ class SpClient {
         await prefs.setBool(key, value);
         break;
       case 3: // String
-        value = _random.nextBool() ? _randomString(_random.nextInt(8) + 3) : jsonEncode(jsonDemo);
+        value = _randomString(_random.nextInt(8) + 3);
         await prefs.setString(key, value);
         break;
       case 4: // List<String>

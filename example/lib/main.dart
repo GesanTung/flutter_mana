@@ -1,4 +1,3 @@
-import 'package:example/sp_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mana/flutter_mana.dart';
@@ -73,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void addSharedPreferences() async {
-    await SpClient.insertRandom();
+
   }
 
   @override

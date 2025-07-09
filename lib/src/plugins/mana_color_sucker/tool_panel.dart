@@ -34,7 +34,7 @@ class _ToolPanelState extends State<ToolPanel> {
     }
   }
 
-  String get colorHex => '#${_color.toARGB32().toRadixString(16).substring(2)}';
+  String get colorHex => '#${_color.value.toRadixString(16).substring(2)}';
 
   void _copyToClipboard() {
     Clipboard.setData(ClipboardData(text: colorHex));

@@ -50,15 +50,13 @@ class _ManaSharedPreferencesViewerState extends State<ManaSharedPreferencesViewe
 
   Future<void> _loadPrefs() async {
     final prefs = await SharedPreferences.getInstance();
-    final keys = prefs.getKeys();
 
-    final List<Model> data = [];
-    for (final (index, key) in keys.indexed) {
+    final keys = prefs.getKeys().toList();
+    final data = List.generate(keys.length, (i) {
+      final key = keys[i];
       final value = prefs.get(key);
-      if (value != null) {
-        data.add(Model(index, key, value.toString(), value.runtimeType.toString()));
-      }
-    }
+      return Model(i, key, value.toString(), value.runtimeType.toString());
+    });
     setState(() => _data = data);
   }
 

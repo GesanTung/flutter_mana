@@ -19,11 +19,11 @@ class SimpleDataTable extends StatelessWidget {
 
   List<DataColumn> _buildHeaders() {
     return const [
-      DataColumn(label: Text('序号'), columnWidth: IntrinsicColumnWidth()),
-      DataColumn(label: Text('Key'), columnWidth: IntrinsicColumnWidth()),
-      DataColumn(label: Text('Value'), columnWidth: IntrinsicColumnWidth()),
-      DataColumn(label: Text('Type'), columnWidth: IntrinsicColumnWidth()),
-      DataColumn(label: Text('操作'), columnWidth: IntrinsicColumnWidth()),
+      DataColumn(label: Text('序号')),
+      DataColumn(label: Text('Key')),
+      DataColumn(label: Text('Value')),
+      DataColumn(label: Text('Type')),
+      DataColumn(label: Text('操作')),
     ];
   }
 

@@ -226,9 +226,11 @@ class _ManaFloatingWindowState extends State<ManaFloatingWindow> {
     switch (widget.position) {
       case PositionType.normal:
         dy = widget.dy ?? (screenSize.height - windowSize.height) / 2;
+        break;
 
       case PositionType.top:
         dy = 100;
+        break;
 
       case PositionType.bottom:
         dy = screenSize.height - windowSize.height;

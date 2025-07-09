@@ -11,14 +11,11 @@ Future<Map<String, dynamic>> getDeviceInfo() async {
     if (kIsWeb) {
       deviceData = _readWebBrowserInfo(await deviceInfoPlugin.webBrowserInfo);
     } else {
-      deviceData = switch (defaultTargetPlatform) {
-        TargetPlatform.android => _readAndroidBuildData(await deviceInfoPlugin.androidInfo),
-        TargetPlatform.iOS => _readIosDeviceInfo(await deviceInfoPlugin.iosInfo),
-        TargetPlatform.linux => _readLinuxDeviceInfo(await deviceInfoPlugin.linuxInfo),
-        TargetPlatform.windows => _readWindowsDeviceInfo(await deviceInfoPlugin.windowsInfo),
-        TargetPlatform.macOS => _readMacOsDeviceInfo(await deviceInfoPlugin.macOsInfo),
-        TargetPlatform.fuchsia => <String, dynamic>{'Error:': 'Fuchsia platform isn\'t supported'},
-      };
+      if (defaultTargetPlatform == TargetPlatform.android) {
+        deviceData = _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
+      } else {
+        deviceData = _readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
+      }
     }
   } on PlatformException {
     deviceData = <String, dynamic>{'Error:': 'Failed to get platform version.'};
@@ -48,20 +45,14 @@ Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {
     'manufacturer': build.manufacturer,
     'model': build.model,
     'product': build.product,
-    'name': build.name,
     'supported32BitAbis': build.supported32BitAbis,
     'supported64BitAbis': build.supported64BitAbis,
     'supportedAbis': build.supportedAbis,
     'tags': build.tags,
     'type': build.type,
     'isPhysicalDevice': build.isPhysicalDevice,
-    'freeDiskSize': build.freeDiskSize,
-    'totalDiskSize': build.totalDiskSize,
     'systemFeatures': build.systemFeatures,
     'serialNumber': build.serialNumber,
-    'isLowRamDevice': build.isLowRamDevice,
-    'physicalRamSize': build.physicalRamSize,
-    'availableRamSize': build.availableRamSize,
   };
 }
 
@@ -71,15 +62,9 @@ Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {
     'systemName': data.systemName,
     'systemVersion': data.systemVersion,
     'model': data.model,
-    'modelName': data.modelName,
     'localizedModel': data.localizedModel,
     'identifierForVendor': data.identifierForVendor,
     'isPhysicalDevice': data.isPhysicalDevice,
-    'isiOSAppOnMac': data.isiOSAppOnMac,
-    'freeDiskSize': data.freeDiskSize,
-    'totalDiskSize': data.totalDiskSize,
-    'physicalRamSize': data.physicalRamSize,
-    'availableRamSize': data.availableRamSize,
     'utsname.sysname:': data.utsname.sysname,
     'utsname.nodename:': data.utsname.nodename,
     'utsname.release:': data.utsname.release,
@@ -130,7 +115,6 @@ Map<String, dynamic> _readMacOsDeviceInfo(MacOsDeviceInfo data) {
     'hostName': data.hostName,
     'arch': data.arch,
     'model': data.model,
-    'modelName': data.modelName,
     'kernelVersion': data.kernelVersion,
     'majorVersion': data.majorVersion,
     'minorVersion': data.minorVersion,

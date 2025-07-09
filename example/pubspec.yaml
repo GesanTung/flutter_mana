@@ -4,18 +4,19 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.8.0
+  sdk: ">=2.19.4 <4.0.0"
 
 dependencies:
-  dio: ^5.8.0+1
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
   flutter_mana:
     path: ../
-  logger: ^2.5.0
-  shared_preferences: ^2.5.3
+
+  dio: ^5.1.1
+  logger: ^1.3.0
+  shared_preferences: ^2.1.1
 
 dev_dependencies:
   flutter_test:

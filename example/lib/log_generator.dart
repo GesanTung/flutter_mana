@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:example/json_demo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mana/flutter_mana.dart';
 import 'package:logger/logger.dart';
@@ -10,13 +9,13 @@ import 'package:logger/logger.dart';
 class ReleaseFilter extends LogFilter {
   @override
   bool shouldLog(LogEvent event) {
-    return event.level.value >= level!.value;
+    return true;
   }
 }
 
 /// 日志随机生成
 class LogGenerator {
-  static final Logger _logger = Logger(level: Level.all, filter: ReleaseFilter(), output: ManaLoggerCollector());
+  static final Logger _logger = Logger(level: Level.debug, filter: ReleaseFilter(), output: ManaLoggerCollector());
   static final Random _random = Random();
 
   // 随机日志级别和消息
@@ -37,7 +36,6 @@ class LogGenerator {
       "内存使用量: ${_random.nextInt(80) + 20}%",
       "服务器响应错误: 404",
       "位置更新: (${_random.nextDouble() * 180 - 90}, ${_random.nextDouble() * 360 - 180})",
-      jsonEncode(jsonDemo),
     ];
     final message = messages[_random.nextInt(messages.length)];
 
@@ -51,6 +49,6 @@ class LogGenerator {
     final stackTrace = _random.nextDouble() > 0.8 ? StackTrace.current : null;
 
     // 打印日志
-    _logger.log(level, message, error: error, stackTrace: stackTrace);
+    _logger.log(level, message, error, stackTrace);
   }
 }
